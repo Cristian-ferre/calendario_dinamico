@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="calendarMenu/calendarMenu.css">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <title>menuRegistration</title>
+</head>
+<body>
+    <div class="descricao-page">
+        <h1>Cadastro de pratos</h1>
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a asp-area="" asp-controller="Home" asp-action="Index">
+                            Home
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item " aria-current="page">Cardapio</li>
+                <li class="breadcrumb-item active" aria-current="page">Cadastro de pratos</li>
+                </ol>
+        </nav>
+    </div>
+
+    <span class="row">
+
+        <!--Inicio Calendario: -->
+
+      
+
+        <div class="a col-md-6 col-lg-6">
+            <!-- <div class="date-description">
+                <h2><STRONG>Quarta-feira, 19 de janeiro de
+                        2023</STRONG></h2>
+            </div> -->
+
+            <div class="date-description" id="selectedDateDescription">
+                <h2><strong>Selecione uma data para o novo prato</strong></h2>
+            </div>
+            
+            <div class="row ">
+                <div class="col-sm-12 col-md-12 col-lg-12  ">
+
+                    <div class="calendar-menu" id="calendar-menu"></div>
+                </div>
+            </div>
+
+
+            <div class="allSelectedDay">
+                <div class="structureDay">
+                    <span>
+                        <div class="SelectedDayOrange">19</div>
+                        <p>Data selecionada</p>
+                    </span>
+                    <span>
+                        <div class="SelectedDayBlue">19</div>
+                        <p>Cardápio aplicado</p>
+                    </span>
+                </div>
+                <div class="structureDay">
+                    <span>
+                        <div>19</div>
+                        <p>Data atual</p>
+                    </span>
+                    <span>
+                        <div class="weekend">19</div>
+                        <p>Final de semana/feriado</p>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+
+        <!--FINAL CALENDARIO-->
+        <div class="b col-md-5 col-lg-5  ">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae nemo reiciendis aspernatur provident maxime? Aspernatur consequatur omnis, sequi est incidunt in neque voluptatum ducimus autem a eveniet, nemo facilis maiores.</p>
+
+        </div>
+    </span>
+
+    <script src="calendarMenu/calendarMenu.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>

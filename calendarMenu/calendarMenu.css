@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap');
+
+:root {
+    --calendar-bg-color: linear-gradient(to bottom, #CBDAFC, #D1E7F3);
+    --calendar-font-color: #102155;
+    --weekend-font-color: red;
+    --weekdays-border-bottom-color: #404040;
+    --calendar-date-hover-color: #505050;
+    --calendar-current-date-color: #1b1f21;
+    --calendar-others-dates-color: #928F91;
+    --calendar-selected-date-color: #F48120;
+    --calendar-today-color: transparent;
+    --calendar-today-innerborder-color: transparent;
+    --calendar-nextprev-bg-color: transparent;
+    --next-prev-arrow-color : #FFF;
+    --calendar-prevnext-date-color: #484848
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.calendar-menu {
+    font-family: 'IBM Plex Sans', sans-serif;
+    position: relative;
+    max-width: 400px; /*change as per your design need */
+    min-width: 320px;
+    background: var(--calendar-bg-color);
+    color: var(--calendar-font-color);
+    margin: 20px auto;
+    box-sizing: border-box;
+    overflow: hidden;
+    font-weight: normal;
+    border-radius: 10px;
+}
+
+.calendar-inner {
+    padding: 15px 5px;
+}
+
+.calendar-menu .calendar-inner .calendar-body {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    text-align: center;
+}
+
+.calendar-menu .calendar-inner .calendar-body .number-item .dateNumber{
+    color: var(--calendar-current-date-color);
+}
+
+.calendar-menu .calendar-inner .next-dates,
+.calendar-menu .calendar-inner .prev-dates {
+    color: var(--calendar-others-dates-color);
+}
+
+.calendar-menu .calendar-inner .calendar-body div {
+    padding: 4px;
+    min-height: 30px;
+    line-height: 30px;
+    border: 1px solid transparent;
+    margin: 5px 2px 0px;
+}
+
+.calendar-menu .calendar-inner .calendar-body div:nth-child(-n+7):hover {
+    border: 1px solid transparent;
+    border-bottom: 1px solid var(--weekdays-border-bottom-color);
+}
+
+.calendar-menu .calendar-inner .calendar-body div>a {
+    color: var(--calendar-font-color);
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+}
+
+.calendar-menu .calendar-inner .calendar-body div:hover {
+    border: 1px solid var(--calendar-date-hover-color);
+    border-radius: 10px;
+}
+
+.calendar-menu .calendar-inner .calendar-body div.empty-dates:hover {
+    border: 1px solid transparent;
+}
+
+.number-item:active{
+    background-color: var(--calendar-selected-date-color);
+}
+
+.calendar-menu .calendar-inner .calendar-controls {
+    display: grid;
+    grid-template-columns: 45px 275px 35px;   
+}
+
+
+.calendar-menu .calendar-inner .calendar-controls .calendar-year-month {
+    display: flex;
+    min-width: 100px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.calendar-menu .calendar-inner .calendar-controls .calendar-next,
+.calendar-menu .calendar-inner .calendar-controls .calendar-prev {
+    text-align: right;
+    margin-left: 23px;
+}
+
+.calendar-menu .calendar-inner .calendar-controls .calendar-year-month .calendar-year-label,
+.calendar-menu .calendar-inner .calendar-controls .calendar-year-month .calendar-month-label {
+    font-weight: 1000;
+    font-size: 20px;
+    text-align: left;
+    margin: 0px 0px 0px 30px;
+}
+
+.calendar-menu .calendar-inner .calendar-body .calendar-today {
+    background: var(--calendar-today-color);
+    border: 1px solid red;
+    border-radius: 10px;
+}
+
+.calendar-menu .calendar-inner .calendar-body .calendar-today:hover {
+    border: 1px solid var(--calendar-date-hover-color);
+    border-radius: 10px;
+}
+
+.calendar-menu .calendar-inner .calendar-body .calendar-today a {
+    outline: 1px solid var(--calendar-today-innerborder-color);
+}
+
+.calendar-menu .calendar-inner .calendar-controls .calendar-next a,
+.calendar-menu .calendar-inner .calendar-controls .calendar-prev a {
+    color: var(--calendar-font-color);
+    font-family: arial, consolas, sans-serif;
+    font-size: 16px;
+    text-decoration: none;
+    padding: 1px 5px;
+    display: inline-block;
+    background: var(--calendar-nextprev-bg-color);
+    margin: 10px 0 10px 0px;
+    border-radius: 4px;
+    background-color: var(--color-secondary);
+}
+
+
+.selectedDay {
+    background-color: #F48120;
+    border-radius: 5px;
+}
+
+.feriado {
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+}
+
+.weekend {
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+}
