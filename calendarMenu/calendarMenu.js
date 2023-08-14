@@ -105,30 +105,46 @@ function CalendarControl() {
             dateDescriptionDiv.innerHTML = selectedInfo;
 
             //exibi no console a data selecionada
-            console.log(
-                `${calendar.getFullYear()}-${String(calendar.getMonth() + 1).padStart(2, '0')}-${String(e.target.textContent).padStart(2, '0')}`
-            );
-
-
+            const dataSelecionada = `${calendar.getFullYear()}-${String(calendar.getMonth() + 1).padStart(2, '0')}-${String(e.target.textContent).padStart(2, '0')}`;
+            console.log("Data selecionada: " + dataSelecionada);
         },
         plotSelectors: function () {
             document.querySelector(
                 ".calendar-menu"
-            ).innerHTML += `<div class="calendar-inner"><div class="calendar-controls">
-          <div class="calendar-year-month">
-            <div class="calendar-month-label"></div>
-            <div class="calendar-year-label"  ></div>
-          </div>
-          <div class="calendar-prev"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 128 128"><path fill="#FFF" d="M88.2 3.8L35.8 56.23 28 64l7.8 7.78 52.4 52.4 9.78-7.76L45.58 64l52.4-52.24z"/></svg></a></div>
-          <div class="calendar-next"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 128 128"><path fill="#FFF" d="M38.8 124.2l52.4-52.42L99 64l-7.77-7.78-52.4-52.4-9.8 7.77L81.44 64 29 116.42z"/></svg></a></div>
-          </div>
-          <div class="calendar-today-date" style="display:none;">Today: 
-            ${calendarControl.calWeekDays[calendarControl.localDate.getDay()]}, 
-            ${calendarControl.localDate.getDate()}, 
-            ${calendarControl.calMonthName[calendarControl.localDate.getMonth()]} 
+            ).innerHTML += `
+            <div class="calendar-inner">
+        <div class="calendar-controls">
+            <div class="calendar-year-month">
+            -
+                <div class="calendar-year-label"></div>
+                -
+            </div>
+            <div class="calendar-month-arrow">
+                <div class="calendar-month-label"></div>
+                <span class="calendar-arrow">
+                    <div class="calendar-prev"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="10"
+                            viewBox="0 0 128 128">
+                            <path fill="#FFF"
+                                d="M88.2 3.8L35.8 56.23 28 64l7.8 7.78 52.4 52.4 9.78-7.76L45.58 64l52.4-52.24z" />
+                        </svg></a>
+                        </div>
+                    <div class="calendar-next"><a href="#"><svg xmlns="http://  www.w3.org/2000/svg" width="14" height="10"
+                            viewBox="0 0 128 128">
+                            <path fill="#FFF"
+                                d="M38.8 124.2l52.4-52.42L99 64l-7.77-7.78-52.4-52.4-9.8 7.77L81.44 64 29 116.42z" />
+                        </svg></a>
+                    </div>
+                </span>
+            </div>
+        </div>
+        <div class="calendar-today-date" style="display:none;">Today:
+            ${calendarControl.calWeekDays[calendarControl.localDate.getDay()]},
+            ${calendarControl.localDate.getDate()},
+            ${calendarControl.calMonthName[calendarControl.localDate.getMonth()]}
             ${calendarControl.localDate.getFullYear()}
-          </div>
-          <div class="calendar-body"></div></div>`;
+        </div>
+        <div class="calendar-body"></div>
+    </div>`;
         },
         plotDayNames: function () {
             for (let i = 0; i < calendarControl.calWeekDays.length; i++) {
@@ -147,12 +163,12 @@ function CalendarControl() {
             // fazendo a integração com a api de feriados
             const countryCode = 'BR'; // Código do país (Brasil)
             const year = calendar.getFullYear(); // Obtém o ano atual
-
-            fetch(`https://date.nager.at/api/v3/LongWeekend/${year}/${countryCode}`)
+            //https://date.nager.at/api/v3/PublicHolidays/2023/br
+            fetch(`https://date.nager.at/api/v3/PublicHolidays/${year}/${countryCode}`)
                 .then(response => response.json())
                 .then(data => {
                     // Data contém uma lista de feriados
-                    console.log(data);
+                    // console.log(data);
 
                     // Chamando o método para marcar os feriados no calendário
                     this.markHolidays(data);
@@ -199,6 +215,8 @@ function CalendarControl() {
             calendarControl.highlightToday();
             calendarControl.plotPrevMonthDates(prevMonthDatesArray);
             calendarControl.plotNextMonthDates();
+
+
         },
         attachEvents: function () {
             let prevBtn = document.querySelector(".calendar-menu .calendar-prev a");
@@ -222,40 +240,49 @@ function CalendarControl() {
                 );
             }
         },
+        markWeekends: function () {
+            // const dateNumbers = document.querySelectorAll(".calendar-menu .dateNumber");
+            // dateNumbers.forEach((dateNumber) => {
+            //     const dayNumber = parseInt(dateNumber.textContent);
+
+            //     const currentDate = new Date(
+            //         calendarControl.localDate.getFullYear(),
+            //         calendarControl.localDate.getMonth(),
+            //         dayNumber
+            //     );
+            //     // console.log(currentDate);
+            //     const dayOfWeek = currentDate.getDay(); // 0 (domingo) a 6 (sábado)
+            //     console.log(dayOfWeek);
+            //     if (dayOfWeek === 3 || dayOfWeek === 4) { // Domingo ou sábado
+            //         dateNumber.classList.add("weekend");
+            //     } else {
+            //         dateNumber.classList.remove("weekend");
+            //     }
+            // });
+        },
         markHolidays: function (feriados) {
-            console.log("----------------------------------------------------------------")
             const dateNumbers = document.querySelectorAll(".calendar-menu .dateNumber");
             dateNumbers.forEach((dateNumber) => {
                 const dayNumber = parseInt(dateNumber.textContent);
-                // console.log(dayNumber);
+
                 const currentDate = new Date(
                     calendarControl.localDate.getFullYear(),
                     calendarControl.localDate.getMonth(),
                     dayNumber
                 );
-                // console.log(currentDate);
 
                 const formattedCurrentDate = `${calendar.getFullYear()}-${String(calendar.getMonth() + 1).padStart(2, '0')}-${String(dayNumber).padStart(2, '0')}`;
-                // console.log("formattedCurrentDate: " + formattedCurrentDate);
-                console.log(formattedCurrentDate);
+
+                // console.log(formattedCurrentDate);
 
                 const isFeriado = feriados.some((feriado) => {
-                    const feriadoDate = new Date(feriado.startDate);
+
+                    const feriadoDate = new Date(feriado.date + 'T00:00:00');
                     const formattedFeriadoDate = `${feriadoDate.getFullYear()}-${String(feriadoDate.getMonth() + 1).padStart(2, '0')}-${String(feriadoDate.getDate()).padStart(2, '0')}`;
 
                     return formattedFeriadoDate === formattedCurrentDate;
-
                 });
-                for (let i = 0; i < feriados.length; i++) {
-                    const feriado = feriados[i];
-                    console.log("aquiii"+{i});
-                    console.log(feriado.startDate);
-                }
 
-                // feriados.forEach((feriado) => {
-                //     console.log(feriado.startDate);
-                // });
-                
                 if (isFeriado) {
                     dateNumber.classList.add("feriado");
                 } else {
@@ -311,6 +338,7 @@ function CalendarControl() {
         attachEventsOnNextPrev: function () {
             calendarControl.plotDates();
             calendarControl.attachEvents();
+            calendarControl.markWeekends(); // Chama a função para marcar os finais de semana
         },
         init: function () {
             calendarControl.plotSelectors();
