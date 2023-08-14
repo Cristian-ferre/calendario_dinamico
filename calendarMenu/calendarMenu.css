@@ -173,7 +173,6 @@
     background-color: #F48120;
     border-radius: 5px;
     color: #FFF !important;
-
 }
 
 
@@ -181,10 +180,10 @@
 .feriado {
     font-weight: 700;
     color: #F48120 !important;
+    pointer-events: none;
 }
 
 .weekend {
-    background-color: blue  !important;
-    color: white;
+    color: white !important;
     border-radius: 5px;
 }
