@@ -184,6 +184,7 @@
 }
 
 .weekend {
-    color: white !important;
-    border-radius: 5px;
+    font-weight: 700;
+    color: #F48120 !important;
+    pointer-events: none;
 }

@@ -68,6 +68,7 @@ function CalendarControl() {
             );
             monthLabel.innerHTML = calendarControl.calMonthName[calendar.getMonth()];
         },
+        
         selectDate: function (e) {
 
 
@@ -205,8 +206,7 @@ function CalendarControl() {
                     ).innerHTML += `<div class="number-item" data-num=${count}><a class="dateNumber" href="#">${count++}</a></div>`;
                 }
             }
-            //document.querySelector('')
-            //remaining dates after month dates
+            
             for (let j = 0; j < prevDateCount + 1; j++) {
                 document.querySelector(
                     ".calendar-menu .calendar-body"
@@ -216,7 +216,8 @@ function CalendarControl() {
             calendarControl.plotPrevMonthDates(prevMonthDatesArray);
             calendarControl.plotNextMonthDates();
 
-
+            // Chama a função para marcar os finais de semana
+            calendarControl.markWeekends();
         },
         attachEvents: function () {
             let prevBtn = document.querySelector(".calendar-menu .calendar-prev a");
@@ -241,24 +242,21 @@ function CalendarControl() {
             }
         },
         markWeekends: function () {
-            // const dateNumbers = document.querySelectorAll(".calendar-menu .dateNumber");
-            // dateNumbers.forEach((dateNumber) => {
-            //     const dayNumber = parseInt(dateNumber.textContent);
-
-            //     const currentDate = new Date(
-            //         calendarControl.localDate.getFullYear(),
-            //         calendarControl.localDate.getMonth(),
-            //         dayNumber
-            //     );
-            //     // console.log(currentDate);
-            //     const dayOfWeek = currentDate.getDay(); // 0 (domingo) a 6 (sábado)
-            //     console.log(dayOfWeek);
-            //     if (dayOfWeek === 3 || dayOfWeek === 4) { // Domingo ou sábado
-            //         dateNumber.classList.add("weekend");
-            //     } else {
-            //         dateNumber.classList.remove("weekend");
-            //     }
-            // });
+            const dateNumbers = document.querySelectorAll(".calendar-menu .dateNumber");
+            dateNumbers.forEach((dateNumber) => {
+                const dayNumber = parseInt(dateNumber.textContent);
+                const currentYear = calendar.getFullYear();
+                const currentMonth = calendar.getMonth();
+                const currentDate = new Date(currentYear, currentMonth, dayNumber);
+                console.log(currentDate);
+                const dayOfWeek = currentDate.getDay(); // 0 para domingo, 1 para segunda, ..., 6 para sábado
+                console.log(dayOfWeek);
+                if (dayOfWeek === 0 || dayOfWeek === 6) {
+                    dateNumber.classList.add("weekend");
+                } else {
+                    dateNumber.classList.remove("weekend");
+                }
+            });
         },
         markHolidays: function (feriados) {
             const dateNumbers = document.querySelectorAll(".calendar-menu .dateNumber");
@@ -350,22 +348,3 @@ function CalendarControl() {
 }
 
 const calendarControl = new CalendarControl();
-
-// async function teste(){
-
-//     await fetch(`https://date.nager.at/api/v3/LongWeekend/2023/BR`)
-//                 .then(response => response)
-//                 .then(data => data.json())
-//                 .finally(response => response)
-
-
-//                 fetch(`https://date.nager.at/api/v3/LongWeekend/2023/BR`)
-//                 .then(response => response)
-//                 .then(data => {
-//                     // Data contém uma lista de feriados
-//                     console.log(data.json());
-
-//                     // Chamando o método para marcar os feriados no calendário
-//                 })
-//                 //.then(response => console.log(response))
-// }
